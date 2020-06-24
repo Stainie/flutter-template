@@ -1,6 +1,8 @@
 # flutter_template
 
-A new Flutter project.
+A project that can be used as a template for new Flutter project. Inspired by Flutter Provider Architecture for State Management by FiddleStacks.
+
+Will contain Provider architecture, with different services and custom widgets.
 
 ## Getting Started
 
