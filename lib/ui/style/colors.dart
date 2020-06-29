@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+
+const Color topaz = Color(0xff18bc9c);
+const Color orangy = Color(0xffff6400);
+const Color rouge = Color(0xffaa1c35);
+const Color darkRed = Color(0xffd92930);
+const Color lightRed = Color(0xffd0021b);
+const Color darkGrey = Color(0xff4a4a4a);
+const Color lightGrey = Color(0xff757575a);
+const Color hintGrey = Color(0xff85888c);
+const Color inputGrey = Color(0xffb5babf);
+const Color middleLightGrey = Color(0xffe6edf2);
+const Color veryLightGrey = Color(0xfff4f3f3);
+const Color brownGrey = Color(0xff9b9b9b);
+const Color brownishGrey = Color(0xff696969);
+const Color dirtyWhite = Color(0xfffafafa);
+const Color notchWhite = Color(0xfff9f9f9);
+const Color linearShadow = Color(0xffF4F7FA);
+const Color dirtyGrey = Color(0xfff0f0f0);
+const Color strongBlue = Color(0xff0391e0);
+const Color iconGrey = Color(0xff979797);
+const Color iconBlue = Color(0xff4A90E2);
+const Color dotBlue = Color(0xff026094);
+const Color navGrey = Color(0xffCED4DA);
+const Color buttonGrey = Color(0xffe5ecf2);
+const Color navButtonGrey = Color(0xff9DA1A6);
+const Color fieldDarkGrey = Color(0xff495057);

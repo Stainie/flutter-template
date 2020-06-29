@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(),
       home: Container(),
       onGenerateRoute: Router.generateRoute,
-      supportedLocales: [
+      supportedLocales: [ // Add new locales here
         Locale("en", ""),
       ],
       localizationsDelegates: [
