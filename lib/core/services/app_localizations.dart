@@ -24,7 +24,7 @@ class AppLocalizations {
     String jsonString =
         await rootBundle.loadString("lang/${locale.languageCode}.json");
 
-    jsonMap = json.decode(jsonString);
+    jsonMap = jsonDecode(jsonString);
   }
 
   String translateString(String key) {
