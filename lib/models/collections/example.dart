@@ -1,7 +1,7 @@
-import '../model_example.dart';
+import '../example.dart';
 import 'base_collection.dart';
 
-class ExampleCollection extends BaseCollection<ModelExample> {
+class ExampleCollection extends BaseCollection<ExampleModel> {
   ExampleCollection(collection) : super(collection);
 
   @override
@@ -11,8 +11,8 @@ class ExampleCollection extends BaseCollection<ModelExample> {
   }
 
   factory ExampleCollection.fromJson(List parsedJson) {
-    List<ModelExample> collection =
-        parsedJson.map((e) => ModelExample.fromJson(e)).toList();
+    List<ExampleModel> collection =
+        parsedJson.map((e) => ExampleModel.fromJson(e)).toList();
 
     return ExampleCollection(collection);
   }

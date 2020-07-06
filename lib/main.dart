@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'core/services/app_localizations.dart';
 import 'locator.dart';
+import 'services/core/app_localizations.dart';
 import 'ui/router.dart';
 
 void main() {
@@ -17,9 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Template',
       theme: ThemeData(),
-      home: Container(),
       onGenerateRoute: Router.generateRoute,
-      supportedLocales: [ // Add new locales here
+      initialRoute: "/",
+      supportedLocales: [
+        // Add new locales here
         Locale("en", ""),
       ],
       localizationsDelegates: [

@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter_template/core/CONSTANTS/api_errors.dart';
-import 'package:flutter_template/core/CONSTANTS/exception.dart';
 import 'package:http/http.dart' as http;
 
-class Api {
+import '../../CONSTANTS/api_errors.dart';
+import '../../CONSTANTS/exception.dart';
+
+class RequestHandler {
   Future executeGetRequest(String route) async {
     bool internet = await _checkConnection();
 
