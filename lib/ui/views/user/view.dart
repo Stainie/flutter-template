@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/ui/views/base_viewmodel.dart';
-import 'package:provider/provider.dart';
 
-import '../../../models/user.dart';
 import '../../style/colors.dart';
 import '../base_view.dart';
+import '../base_viewmodel.dart';
 import 'viewmodel.dart';
 
 class UserView extends StatefulWidget {
@@ -38,10 +36,7 @@ class _UserViewState extends State<UserView> {
                       ? CircularProgressIndicator()
                       : Text("button"),
                   onPressed: () async {
-                    var success = await model
-                        .authenticateUser(_textEditingController.text);
-
-                    if (success) Navigator.pushNamed(context, 'post');
+                    await model.authenticateUser(_textEditingController.text);
                   }),
             ));
   }

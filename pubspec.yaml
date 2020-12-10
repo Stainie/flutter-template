@@ -40,6 +40,7 @@ dependencies:
 
   #navigation (allows navigation from viewmodel - without context)
   auto_route: ^0.6.9
+  stacked_services: ^0.6.0+1
 
   shared_preferences:
   connectivity:

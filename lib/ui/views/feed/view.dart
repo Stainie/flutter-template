@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/models/user.dart';
-import 'package:flutter_template/ui/views/base_view.dart';
-import 'package:flutter_template/ui/views/base_viewmodel.dart';
-import 'package:flutter_template/ui/views/feed/viewmodel.dart';
 import 'package:provider/provider.dart';
+
+import '../../../models/user.dart';
+import '../base_view.dart';
+import '../base_viewmodel.dart';
+import 'viewmodel.dart';
 
 class FeedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseView<FeedModel>(
+    return BaseView<FeedViewModel>(
       onModelReady: (model) =>
           model.getPosts(Provider.of<User>(context).id.toString()),
       builder: (context, model, child) => Scaffold(
@@ -17,10 +18,7 @@ class FeedView extends StatelessWidget {
             : ListView.builder(
                 itemCount: model.feed.length,
                 itemBuilder: (context, index) => GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, "feedEntry",
-                          arguments: model.feed[index]);
-                    },
+                    onTap: () => model.navigateToEntry(index),
                     child: Text(model.feed[index].description)),
               ),
       ),

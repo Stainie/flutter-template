@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_template/services/auth_service.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
 import 'app/router.gr.dart' as router;
+import 'services/auth_service.dart';
 import 'services/core/app_localizations.dart';
 
 void main() {
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(),
         onGenerateRoute: router.Router().onGenerateRoute,
         initialRoute: router.Routes.userView,
+        navigatorKey: locator<NavigationService>().navigatorKey,
         supportedLocales: [
           // Add new locales here
           Locale("en", ""),

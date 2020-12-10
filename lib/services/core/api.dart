@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter_template/constants/api_errors.dart';
 import 'package:http/http.dart' as http;
 
+import '../../constants/api_errors.dart';
 import '../../constants/exception.dart';
 
 class Api {
