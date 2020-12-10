@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter_template/constants/exception.dart';
 import 'package:flutter_template/models/user.dart';
 
-import '../locator.dart';
+import '../app/locator.dart';
 import 'core/api.dart';
 
 class AuthenticationService {

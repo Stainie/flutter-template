@@ -1,6 +1,6 @@
 import 'package:flutter_template/services/auth_service.dart';
 
-import '../../../locator.dart';
+import '../../../app/locator.dart';
 import '../base_viewmodel.dart';
 
 class UserViewModel extends BaseViewModel {

@@ -1,5 +1,5 @@
 import '../constants/exception.dart';
-import '../locator.dart';
+import '../app/locator.dart';
 import '../models/collections/feed.dart';
 import '../models/feed.dart';
 import 'core/api.dart';

@@ -14,8 +14,14 @@ class FeedView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: model.state == ViewState.Busy
             ? CircularProgressIndicator()
-            : ListView(
-                children: [],
+            : ListView.builder(
+                itemCount: model.feed.length,
+                itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, "feedEntry",
+                          arguments: model.feed[index]);
+                    },
+                    child: Text(model.feed[index].description)),
               ),
       ),
     );

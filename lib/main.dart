@@ -3,9 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
-import 'locator.dart';
+import 'app/locator.dart';
+import 'app/router.gr.dart' as router;
 import 'services/core/app_localizations.dart';
-import 'ui/router.dart' as router;
 
 void main() {
   setUpLocator();
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Template',
         theme: ThemeData(),
-        onGenerateRoute: router.Router.generateRoute,
-        initialRoute: "/",
+        onGenerateRoute: router.Router().onGenerateRoute,
+        initialRoute: router.Routes.userView,
         supportedLocales: [
           // Add new locales here
           Locale("en", ""),
