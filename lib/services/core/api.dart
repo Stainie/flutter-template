@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter_template/constants/api_errors.dart';
 import 'package:http/http.dart' as http;
 
-import '../../CONSTANTS/api_errors.dart';
-import '../../CONSTANTS/exception.dart';
+import '../../constants/exception.dart';
 
-class RequestHandler {
+class Api {
   Future executeGetRequest(String route) async {
     bool internet = await _checkConnection();
 
@@ -87,5 +87,20 @@ class RequestHandler {
     }
 
     return true;
+  }
+
+  handleException(e) {
+    print(e.cause);
+    switch (e.cause) {
+      case ApiErrors.ACCESS_DENIED:
+        break;
+      case ApiErrors.WRONG_VERSION:
+        break;
+      case ApiErrors.NO_INTERNET:
+        break;
+      case ApiErrors.OTHER_ERROR:
+        break;
+    }
+    return null;
   }
 }

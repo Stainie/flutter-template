@@ -33,7 +33,7 @@ class AppLocalizations {
 
   List<String> translateList(String key) {
     List list = jsonMap[key];
-    List<String> listString = new List<String>();
+    List<String> listString = List();
 
     for (var i = 0; i < list.length; i++) {
       listString.add(list[i]);
@@ -43,7 +43,7 @@ class AppLocalizations {
   }
 
   Map<dynamic, dynamic> translateMap(String key) {
-    Map<dynamic, dynamic> map = new Map<dynamic, dynamic>();
+    Map<dynamic, dynamic> map = Map();
 
     map = jsonMap[key].map((k, value) {
       return MapEntry(k.toString(), value.toString());
@@ -59,12 +59,13 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
+    // list all the language codes below
     return ['en'].contains(locale.languageCode);
   }
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations = new AppLocalizations(locale);
+    AppLocalizations localizations = AppLocalizations(locale);
     await localizations.load();
     return localizations;
   }

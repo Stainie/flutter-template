@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../CONSTANTS/view_state.dart';
+enum ViewState { Idle, Busy }
 
 class BaseViewModel extends ChangeNotifier {
   ViewState _state = ViewState.Idle;
