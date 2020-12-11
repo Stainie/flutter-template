@@ -1,12 +1,10 @@
-import 'package:flutter_template/app/router.gr.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../models/feed.dart';
-import '../../../services/core/api.dart';
-import '../../../services/feed_service.dart';
-import '../base_viewmodel.dart';
-
 import '../../../app/locator.dart';
+import '../../../app/router.gr.dart';
+import '../../../models/feed.dart';
+import '../../../services/feed_service.dart';
 
 class FeedViewModel extends BaseViewModel {
   final FeedService _feedService = locator<FeedService>();
@@ -15,9 +13,9 @@ class FeedViewModel extends BaseViewModel {
   List<Feed> feed = List();
 
   Future getPosts(String id) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     feed = await _feedService.getFeedList(id);
-    setState(ViewState.Idle);
+    setBusy(false);
   }
 
   void navigateToEntry(int id) {

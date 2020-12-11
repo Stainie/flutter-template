@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Change Stream Provider into MultiProvider if needed
+    // We can ignore the Stream(multi)provider, and just inject service where global info is needed
     return StreamProvider(
       create: (context) => locator<AuthenticationService>().userStream.stream,
       child: MaterialApp(

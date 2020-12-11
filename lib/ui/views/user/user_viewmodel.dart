@@ -1,23 +1,30 @@
-import 'package:flutter_template/app/router.gr.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/locator.dart';
+import '../../../app/router.gr.dart';
 import '../../../services/auth_service.dart';
-import '../base_viewmodel.dart';
 
 class UserViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
   final NavigationService _navigator = locator<NavigationService>();
 
-  Future authenticateUser(String text) async {
-    setState(ViewState.Busy);
+  String _username = "";
 
-    bool response = await _authenticationService.authenticateUser(text);
+  String get username => _username;
 
-    setState(ViewState.Idle);
+  Future authenticateUser() async {
+    setBusy(true);
+
+    bool response = await _authenticationService.authenticateUser(_username);
+    setBusy(false);
     if (response) {
       _navigator.navigateTo(Routes.feedView);
     }
+  }
+
+  void setUsername(String username) {
+    _username = username;
   }
 }

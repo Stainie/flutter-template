@@ -9,8 +9,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../ui/views/feed/view.dart';
-import '../ui/views/user/view.dart';
+import '../ui/views/feed/feed_view.dart';
+import '../ui/views/user/user_view.dart';
 
 class Routes {
   static const String userView = '/';
