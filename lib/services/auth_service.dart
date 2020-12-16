@@ -13,11 +13,12 @@ class AuthenticationService {
 
   Future<bool> authenticateUser(String text) async {
     try {
-      User userModel = User(username: text);
+      User userModel = User(username: text, id: 1);
 
       var body = jsonEncode(userModel.toJson());
-      userModel = await _api.executePostRequest("authenticate", body);
+      final response = await _api.executePostRequest("authenticate", body);
 
+      userModel.authenticated = response['authenticated'];
       userStream.add(userModel);
 
       return true;

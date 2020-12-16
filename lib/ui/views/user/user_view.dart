@@ -14,14 +14,17 @@ class UserView extends StatefulWidget {
 }
 
 class _UserViewState extends State<UserView> {
+  final _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<UserViewModel>.nonReactive(
+        viewModelBuilder: () => UserViewModel(),
         builder: (context, model, child) => Scaffold(
-              backgroundColor: lightGrey,
               body: Center(
                   child: Column(
-                children: [_TextInput(), _CurrentUsername()],
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[_TextInput(), _CurrentUsername()],
               )),
               floatingActionButton: FloatingActionButton(
                   child: model.isBusy
@@ -30,8 +33,7 @@ class _UserViewState extends State<UserView> {
                   onPressed: () async {
                     await model.authenticateUser();
                   }),
-            ),
-        viewModelBuilder: null);
+            ));
   }
 }
 
@@ -44,6 +46,10 @@ class _TextInput extends HookViewModelWidget<UserViewModel> {
     return TextField(
       controller: controller,
       onChanged: viewModel.setUsername,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: 'User Name',
+      ),
     );
   }
 }
