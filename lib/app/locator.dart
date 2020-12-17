@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../services/auth_service.dart';
-import '../services/state_service.dart';
+import '../services/app_state.dart';
 import '../services/feed_service.dart';
 import '../services/core/api.dart';
 import '../services/core/prefs_handler.dart';
@@ -19,7 +19,7 @@ void setUpLocator() {
   locator.registerLazySingleton(() => SystemServices());
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => NavigationService());
-  locator.registerLazySingleton(() => StateService());
+  locator.registerLazySingleton(() => AppState());
   locator.registerLazySingleton(() => FeedService());
 
   locator.registerFactory(() => UserViewModel());

@@ -5,7 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
 import 'app/router.gr.dart' as router;
-import 'services/auth_service.dart';
+import 'services/app_state.dart';
 import 'services/core/app_localizations.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     // Change Stream Provider into MultiProvider if needed
     // We can ignore the Stream(multi)provider, and just inject service where global info is needed
     return StreamProvider(
-      create: (context) => locator<AuthenticationService>().userStream.stream,
+      create: (context) => locator<AppState>().appStateStream.stream,
       child: MaterialApp(
         title: 'Flutter Template',
         theme: ThemeData(),

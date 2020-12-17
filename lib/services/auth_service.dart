@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'app_state.dart';
 import '../app/locator.dart';
 import '../constants/exception.dart';
 import '../models/user.dart';
 import 'core/api.dart';
 
 class AuthenticationService {
-  StreamController<User> userStream = StreamController<User>();
-
   final Api _api = locator<Api>();
+  final AppState _appState = locator<AppState>();
 
   Future<bool> authenticateUser(String text) async {
     try {
@@ -19,8 +18,7 @@ class AuthenticationService {
       final response = await _api.executePostRequest("authenticate", body);
 
       userModel.authenticated = response['authenticated'];
-      userStream.add(userModel);
-
+      _appState.user = userModel;
       return true;
     } on CustomException catch (e) {
       return _api.handleException(e);

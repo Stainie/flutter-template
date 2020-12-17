@@ -1,5 +1,5 @@
-import 'dart:async';
-import 'package:flutter_template/services/core/app_state.dart';
+/*import 'dart:async';
+import 'package:flutter_template/models/app_state.dart';
 
 class StateService {
   StreamController<AppState> stateStream = StreamController<AppState>();
@@ -10,3 +10,4 @@ class StateService {
     stateStream.add(this.state);
   }
 }
+*/

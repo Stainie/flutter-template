@@ -14,8 +14,6 @@ class UserView extends StatefulWidget {
 }
 
 class _UserViewState extends State<UserView> {
-  final _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<UserViewModel>.nonReactive(

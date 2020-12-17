@@ -13,15 +13,14 @@ class FeedView extends StatelessWidget {
         body: model.isBusy
             ? CircularProgressIndicator()
             : ListView.builder(
-                itemCount: model.feed.length,
+                itemCount: model.state.feed.length,
                 itemBuilder: (context, index) => GestureDetector(
                     onTap: () => model.navigateToEntry(index),
-                    child: Text(model.feed[index].description)),
+                    child: Text(model.state.feed[index].description)),
               ),
       ),
       viewModelBuilder: () => FeedViewModel(),
-      onModelReady: (model) =>
-          model.getPosts(Provider.of<User>(context).id.toString()),
+      onModelReady: (model) => model.getPosts(model.state.user.id.toString()),
     );
   }
 }

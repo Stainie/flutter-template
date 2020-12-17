@@ -1,7 +1,10 @@
 import 'package:flutter_template/services/core/default_data.dart';
 
-class AppState {
-  String defaultError;
+/* class AppState {
+  User user;
+  FeedCollection feeds; */
+
+/*  String defaultError;
 
   Map app = {'user': {}..addAll(defaultUserData), 'page': '/login'};
 
@@ -60,5 +63,5 @@ class AppState {
 
   AppState clone() {
     return new AppState(this.ui, this.data, this.app);
-  }
-}
+  }*/
+//}
