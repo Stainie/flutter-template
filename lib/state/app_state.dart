@@ -1,10 +1,7 @@
 import '../models/user.dart';
 import '../models/feed.dart';
-import 'dart:async';
 
 class AppState {
-  StreamController<AppState> appStateStream = StreamController<AppState>();
-
   User _user;
   List<Feed> _feed;
 
@@ -14,7 +11,6 @@ class AppState {
 
   set user(User user) {
     this._user = user;
-    this.notify();
   }
 
   get feed {
@@ -23,10 +19,5 @@ class AppState {
 
   set feed(List<Feed> feed) {
     this._feed = feed;
-    this.notify();
-  }
-
-  void notify() {
-    appStateStream.add(this);
   }
 }

@@ -4,24 +4,28 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../app/locator.dart';
 import '../../../app/router.gr.dart';
 import '../../../models/feed.dart';
-import '../../../models/collections/feed.dart';
 import '../../../services/feed_service.dart';
-import '../../../services/app_state.dart';
+import '../../../services/app_state_service.dart';
 
 class FeedViewModel extends BaseViewModel {
   final FeedService _feedService = locator<FeedService>();
   final NavigationService _navigator = locator<NavigationService>();
-  final AppState _appState = locator<AppState>();
+  final AppStateService _appStateService = locator<AppStateService>();
 
   get state {
-    return _appState;
+    return _appStateService.state;
   }
 
   List<Feed> feed = List();
 
   Future getPosts(String id) async {
     setBusy(true);
-    _appState.feed = await _feedService.getFeedList(id);
+    feed = await _feedService.getFeedList(id);
+
+    _appStateService.setState((state) {
+      state.feed = feed;
+    });
+
     setBusy(false);
   }
 

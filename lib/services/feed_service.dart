@@ -2,7 +2,6 @@ import '../app/locator.dart';
 import '../constants/exception.dart';
 import '../models/collections/feed.dart';
 import '../models/feed.dart';
-import 'app_state.dart';
 import 'core/api.dart';
 
 class FeedService {
