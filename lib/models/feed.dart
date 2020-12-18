@@ -14,4 +14,8 @@ class Feed implements BaseModel {
   factory Feed.fromJson(Map<String, dynamic> parsedJson) {
     return Feed(parsedJson["title"], parsedJson["body"]);
   }
+
+  Feed clone() {
+    return Feed(this.name, this.description);
+  }
 }

@@ -19,6 +19,7 @@ class AuthenticationService {
 
       userModel.authenticated = response['authenticated'];
 
+      //  Update global app state
       _appStateService.setState((state) {
         state.user = userModel;
       });

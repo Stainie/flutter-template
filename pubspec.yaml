@@ -37,6 +37,7 @@ dependencies:
   stacked: ^1.7.6
   stacked_hooks: ^0.1.3+2 # for partial widgets (updating only one child widget)
   flutter_hooks: ^0.15.0 # for removing extra code (controllers init and dispose)
+  reselect: ^0.4.0
 
   #singleton management (dependency injection)
   get_it: ^4.0.2

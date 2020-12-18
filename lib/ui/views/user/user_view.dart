@@ -43,6 +43,9 @@ class _TextInput extends HookViewModelWidget<UserViewModel> {
     var controller = useTextEditingController();
     return TextField(
       controller: controller,
+
+      //  No logic in views except references to event functions (like here)
+      // and pipes (if implemented)
       onChanged: viewModel.setUsername,
       decoration: InputDecoration(
         border: OutlineInputBorder(),

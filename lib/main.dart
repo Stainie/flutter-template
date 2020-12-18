@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
     // Change Stream Provider into MultiProvider if needed
     // We can ignore the Stream(multi)provider, and just inject service where global info is needed
     return StreamProvider(
+      //  Use AppStateService to manage app/global state
       create: (context) => locator<AppStateService>().appStateStream.stream,
       child: MaterialApp(
         title: 'Flutter Template',

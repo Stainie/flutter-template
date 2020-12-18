@@ -18,4 +18,11 @@ class User implements BaseModel {
         username: parsedJson["username"],
         authenticated: parsedJson["authenticated"]);
   }
+
+  User clone() {
+    return User(
+        id: this.id,
+        username: this.username,
+        authenticated: this.authenticated);
+  }
 }

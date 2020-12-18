@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:stacked/stacked.dart';
 
-import '../../../models/user.dart';
+import 'package:stacked/stacked.dart';
 import 'feed_viewmodel.dart';
 
 class FeedView extends StatelessWidget {
@@ -16,7 +14,9 @@ class FeedView extends StatelessWidget {
                 itemCount: model.state.feed.length,
                 itemBuilder: (context, index) => GestureDetector(
                     onTap: () => model.navigateToEntry(index),
-                    child: Text(model.state.feed[index].description)),
+                    child: Text(model.state.feed[index].description +
+                        '\n' +
+                        model.computed.first.name)),
               ),
       ),
       viewModelBuilder: () => FeedViewModel(),

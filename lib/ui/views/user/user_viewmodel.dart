@@ -11,8 +11,12 @@ class UserViewModel extends BaseViewModel {
   final NavigationService _navigator = locator<NavigationService>();
 
   String _username = "";
-
   String get username => _username;
+
+  //  Called from _TextInput in user view
+  void setUsername(String username) {
+    _username = username;
+  }
 
   Future authenticateUser() async {
     setBusy(true);
@@ -22,9 +26,5 @@ class UserViewModel extends BaseViewModel {
     if (response) {
       _navigator.navigateTo(Routes.feedView);
     }
-  }
-
-  void setUsername(String username) {
-    _username = username;
   }
 }

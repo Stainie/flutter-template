@@ -12,6 +12,10 @@ class FeedViewModel extends BaseViewModel {
   final NavigationService _navigator = locator<NavigationService>();
   final AppStateService _appStateService = locator<AppStateService>();
 
+  get computed {
+    return _appStateService.selectors.results;
+  }
+
   get state {
     return _appStateService.state;
   }
@@ -22,6 +26,7 @@ class FeedViewModel extends BaseViewModel {
     setBusy(true);
     feed = await _feedService.getFeedList(id);
 
+    //  update global state
     _appStateService.setState((state) {
       state.feed = feed;
     });
