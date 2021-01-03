@@ -7,7 +7,7 @@ import 'core/api.dart';
 class FeedService {
   final Api _api = locator<Api>();
 
-  Future<List<Feed>> getFeedList(String id) async {
+  Future<List<Feed>> getFeedList(int id) async {
     try {
       var exampleRaw = await _api.executeGetRequest("feed/$id");
 

@@ -31,7 +31,7 @@ class _UserViewState extends State<UserView> {
                     await model.authenticateUser();
                   }),
             ),
-        viewModelBuilder: null);
+        viewModelBuilder: () => UserViewModel());
   }
 }
 
