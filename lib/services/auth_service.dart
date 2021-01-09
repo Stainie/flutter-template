@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import '../app/locator.dart';
-import '../constants/exception.dart';
 import '../models/user.dart';
 import 'core/api.dart';
 

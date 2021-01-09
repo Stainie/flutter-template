@@ -11,7 +11,6 @@ class UserViewModel extends BaseViewModel {
   final NavigationService _navigator = locator<NavigationService>();
 
   String _username = "";
-
   String get username => _username;
 
   Future authenticateUser() async {
