@@ -43,7 +43,7 @@ dependencies:
 
   #navigation (allows navigation from viewmodel - without context)
   auto_route: ^0.6.9 # run - flutter pub run build_runner build --delete-conflicting-outputs after adding new route
-  stacked_services: ^0.6.0+1
+  stacked_services: ^0.6.0+1 # used for performing functionalities that require context within ViewModel - also includes showing BottomSheets, Dialogs and SnackBars
 
   shared_preferences:
   connectivity:
