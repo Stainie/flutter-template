@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
 
+import 'package:stacked/stacked.dart';
 import 'feed_viewmodel.dart';
 
 class FeedView extends StatelessWidget {
@@ -11,10 +11,12 @@ class FeedView extends StatelessWidget {
         body: model.isBusy
             ? CircularProgressIndicator()
             : ListView.builder(
-                itemCount: model.feed.length,
+                itemCount: model.state.feed.length,
                 itemBuilder: (context, index) => GestureDetector(
                     onTap: () => model.navigateToEntry(index),
-                    child: Text(model.feed[index].description)),
+                    child: Text(model.state.feed[index].description +
+                        '\n' +
+                        model.computed.first.name)),
               ),
       ),
       viewModelBuilder: () => FeedViewModel(),

@@ -4,6 +4,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
 import 'app/router.gr.dart' as router;
+import 'services/app_state_service.dart';
 import 'services/core/app_localizations.dart';
 
 void main() {

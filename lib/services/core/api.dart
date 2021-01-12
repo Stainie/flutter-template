@@ -12,8 +12,18 @@ class Api {
       throw CustomException(e);
     }
 
-    http.Response response = await http
-        .get(Uri.encodeFull(route), headers: {"Accept": "application/json"});
+    /* http.Response response = await http
+        .get(Uri.encodeFull(route), headers: {"Accept": "application/json"}); */
+
+    http.Response response;
+
+    if (route.startsWith('feed')) {
+      response = http.Response(
+          '{ "data": [ { "title": "Strong turnout for Ajax", "body": "What a game that was" }, { "title": "Another rainy day", "body": "Just like yesterday" } ] }',
+          200);
+    } else {
+      response = http.Response('{"error": "Access Denied"}', 403);
+    }
 
     if (response.statusCode == 403) {
       var e = {"type": ApiErrors.ACCESS_DENIED};
@@ -46,12 +56,20 @@ class Api {
       throw CustomException(e);
     }
 
-    http.Response response = await http.post(Uri.encodeFull(route),
+    /* http.Response response = await http.post(Uri.encodeFull(route),
         headers: {
           "Accept": "application/json",
           "Content-type": "application/json"
         },
-        body: body);
+        body: body); */
+
+    http.Response response;
+
+    if (route == "authenticate") {
+      response = http.Response('{ "data": { "authenticated": true } }', 200);
+    } else {
+      response = http.Response('{"error": "Access Denied"}', 403);
+    }
 
     if (response.statusCode == 403) {
       var e = {"type": ApiErrors.ACCESS_DENIED};
