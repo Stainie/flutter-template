@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
 
-import '../../constants/api_errors.dart';
-import '../../constants/exception.dart';
-
 class Api {
   Future executeGetRequest(String route) async {
     bool internet = await _checkConnection();
@@ -122,3 +119,10 @@ class Api {
     return null;
   }
 }
+
+class CustomException implements Exception {
+  final cause;
+  CustomException(this.cause);
+}
+
+enum ApiErrors { NO_INTERNET, WRONG_VERSION, ACCESS_DENIED, OTHER_ERROR }

@@ -2,13 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'app_state_service.dart';
 import '../app/locator.dart';
-import '../constants/exception.dart';
 import '../models/user.dart';
 import 'core/api.dart';
 
 class AuthenticationService {
   final Api _api = locator<Api>();
   final AppStateService _appStateService = locator<AppStateService>();
+
+  User _user;
+  User get user => _user;
 
   Future<bool> authenticateUser(String text) async {
     try {

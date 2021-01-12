@@ -33,18 +33,18 @@ dependencies:
   cupertino_icons: ^0.1.3
 
   #state management
-  provider: ^4.1.3
   stacked: ^1.7.6
-  stacked_hooks: ^0.1.3+2 # for partial widgets (updating only one child widget)
-  flutter_hooks: ^0.15.0 # for removing extra code (controllers init and dispose)
   reselect: ^0.4.0
+  stacked_hooks: ^0.1.3+2 # for partial widgets (updating only one child widget instead of all)
+  flutter_hooks: ^0.15.0 # for removing extra code (f.e. allows creating stateless text editing widgets - doesn't require init and dispose)
+  observable_ish: ^2.1.4 # for adding a reactive values to services that notify all the affected view models
 
-  #singleton management (dependency injection)
+  #inversion of control management (dependency injection)
   get_it: ^4.0.2
 
   #navigation (allows navigation from viewmodel - without context)
-  auto_route: ^0.6.9
-  stacked_services: ^0.6.0+1
+  auto_route: ^0.6.9 # run - flutter pub run build_runner build --delete-conflicting-outputs after adding new route
+  stacked_services: ^0.6.0+1 # used for performing functionalities that require context within ViewModel - also includes showing BottomSheets, Dialogs and SnackBars
 
   shared_preferences:
   connectivity:
@@ -56,6 +56,7 @@ dev_dependencies:
 
   auto_route_generator: ^0.6.9
   build_runner:
+  mockito:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

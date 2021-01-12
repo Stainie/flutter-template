@@ -20,7 +20,7 @@ class FeedView extends StatelessWidget {
               ),
       ),
       viewModelBuilder: () => FeedViewModel(),
-      onModelReady: (model) => model.getPosts(model.state.user.id.toString()),
+      onModelReady: (model) => model.getPosts(),
     );
   }
 }
