@@ -1,6 +1,6 @@
 import 'base_model.dart';
 
-class Feed implements BaseModel {
+class Feed implements BaseModel<Feed> {
   String name;
   String description;
 
@@ -15,6 +15,7 @@ class Feed implements BaseModel {
     return Feed(parsedJson["title"], parsedJson["body"]);
   }
 
+  @override
   Feed clone() {
     return Feed(this.name, this.description);
   }

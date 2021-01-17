@@ -1,6 +1,6 @@
 import 'base_model.dart';
 
-class User implements BaseModel {
+class User implements BaseModel<User> {
   int id;
   String username = "";
   bool authenticated = false;
@@ -19,6 +19,7 @@ class User implements BaseModel {
         authenticated: parsedJson["authenticated"]);
   }
 
+  @override
   User clone() {
     return User(
         id: this.id,

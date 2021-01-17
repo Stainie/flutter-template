@@ -1,18 +1,23 @@
+import 'package:flutter_template/services/base_service.dart';
+import 'package:flutter_template/services/core/app_state_service.dart';
+
 import '../app/locator.dart';
 import '../models/collections/feed.dart';
 import '../models/feed.dart';
 import 'core/api.dart';
 
-class FeedService {
+class FeedService extends BaseService {
   final Api _api = locator<Api>();
 
   Future<List<Feed>> getFeedList(int id) async {
     try {
-      var exampleRaw = await _api.executeGetRequest("feed/$id");
+      var feedRaw = await _api.executeGetRequest("feed/$id");
 
-      List<Feed> examplesList = FeedCollection.fromJson(exampleRaw).collection;
+      FeedCollection feedList = FeedCollection.fromJson(feedRaw);
 
-      return examplesList;
+      runAndUpdateState(feedList);
+
+      return feedList.collection;
     } on CustomException catch (e) {
       return _api.handleException(e);
     }

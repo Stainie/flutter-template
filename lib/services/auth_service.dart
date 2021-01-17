@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
-import 'app_state_service.dart';
+
 import '../app/locator.dart';
 import '../models/user.dart';
+import 'base_service.dart';
 import 'core/api.dart';
 
-class AuthenticationService {
+class AuthenticationService extends BaseService {
   final Api _api = locator<Api>();
-  final AppStateService _appStateService = locator<AppStateService>();
 
+  // TODO: remove this properties?
   User _user;
   User get user => _user;
 
@@ -21,10 +22,7 @@ class AuthenticationService {
 
       userModel.authenticated = response['authenticated'];
 
-      //  Update global app state
-      _appStateService.setState((state) {
-        state.user = userModel;
-      });
+      runAndUpdateState(userModel);
 
       return true;
     } on CustomException catch (e) {

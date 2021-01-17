@@ -4,7 +4,6 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
 import 'app/router.gr.dart' as router;
-import 'services/app_state_service.dart';
 import 'services/core/app_localizations.dart';
 
 void main() {
@@ -15,8 +14,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Change Stream Provider into MultiProvider if needed
-    // We can ignore the Stream(multi)provider, and just inject service where global info is needed
     return MaterialApp(
       title: 'Flutter Template',
       theme: ThemeData(),
