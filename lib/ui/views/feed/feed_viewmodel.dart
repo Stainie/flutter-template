@@ -13,15 +13,12 @@ class FeedViewModel extends ReactiveViewModel {
   final NavigationService _navigator = locator<NavigationService>();
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
-  final ReactiveServiceExample _reactiveServiceExample =
-      locator<ReactiveServiceExample>();
 
-  List<Feed> feed = List();
+  List<Feed> get feed => _feedService.getFeedList();
 
   Future getPosts() async {
-    feed = await runBusyFuture(
-        _feedService.getFeedList(_authenticationService.user.id));
-    notifyListeners();
+    await runBusyFuture(
+        _feedService.retrieveFeedList(_authenticationService.getUser().id));
   }
 
   void navigateToEntry(int id) {
@@ -29,6 +26,8 @@ class FeedViewModel extends ReactiveViewModel {
   }
 
   @override
-  // TODO: implement reactiveServices
-  List<ReactiveServiceMixin> get reactiveServices => [_reactiveServiceExample];
+  List<ReactiveServiceMixin> get reactiveServices => [_feedService];
+
+  //final ReactiveServiceExample _reactiveServiceExample =
+  //    locator<ReactiveServiceExample>();
 }
