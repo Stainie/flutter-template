@@ -12,7 +12,14 @@ import '../../models/collections/feed.dart';
 import '../../models/user.dart';
 
 class AppStateService {
-  AppState state = AppState(stateValues: initialState);
+  AppState appState = AppState(state: initialState);
+
+  AppState getAppState() {
+    return this.appState;
+  }
+
+  void setState(Map<String, dynamic> mutation) {}
+
   /* Map<Type, BaseService> allServices = {
     FeedCollection: locator<FeedService>(),
     User: locator<AuthenticationService>()

@@ -4,13 +4,13 @@ import '../models/user.dart';
 import 'package:flutter_template/models/root_model.dart';
 
 class AppState {
-  Map<Type, dynamic> stateValues;
+  Map<String, dynamic> state;
 
-  AppState({this.stateValues});
+  AppState({this.state});
 
   BaseModel setModel(BaseModel model) {
     BaseModel newModel = model.clone();
-    stateValues[model.runtimeType] = newModel;
+    state[model.runtimeType] = newModel;
     return newModel;
   }
 

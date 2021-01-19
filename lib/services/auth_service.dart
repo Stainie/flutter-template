@@ -5,6 +5,7 @@ import '../app/locator.dart';
 import '../models/user.dart';
 import 'base_service.dart';
 import 'core/api.dart';
+import '../state/app_state_constants.dart';
 
 User defaultUserModel = User(username: null, id: null);
 
@@ -12,7 +13,9 @@ class AuthenticationService extends BaseService<User> {
   final Api _api = locator<Api>();
 
   AuthenticationService() {
-    initialiseRxModel(defaultUserModel);
+    initialiseRxAppState();
+
+    //initialiseRxModel(defaultUserModel);
   }
 
   Future<bool> authenticateUser(String text) async {
@@ -23,8 +26,9 @@ class AuthenticationService extends BaseService<User> {
       final response = await _api.executePostRequest("authenticate", body);
 
       userModel.authenticated = response['authenticated'];
+      appStateService.setState({APP_STATE_USER_KEY: userModel});
 
-      setRxModelValue(userModel);
+      // setRxModelValue(userModel);
 
       return true;
     } on CustomException catch (e) {

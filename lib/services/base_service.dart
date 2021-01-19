@@ -6,11 +6,20 @@ import 'package:flutter_template/app/locator.dart';
 import 'package:flutter_template/models/base_model.dart';
 import 'package:flutter_template/models/root_model.dart';
 import 'package:flutter_template/services/core/app_state_service.dart';
+import '../state/app_state.dart';
 
 // TODO: using RootModel until we learn a way to have list of potential extends ?
 
 class BaseService<T extends RootModel> {
   RxValue<T> _rxModel;
+  RxValue<AppState> _rxAppState;
+
+  AppStateService appStateService = locator<AppStateService>();
+
+  initialiseRxAppState() {
+    this._rxAppState =
+        RxValue<AppState>(initial: appStateService.getAppState());
+  }
 
   initialiseRxModel(T value) {
     this._rxModel = RxValue<T>(initial: value);
