@@ -6,7 +6,6 @@ import '../../../app/router.gr.dart';
 import '../../../models/feed.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/feed_service.dart';
-import '../../../services/reactive_service_example.dart';
 
 class FeedViewModel extends ReactiveViewModel {
   final FeedService _feedService = locator<FeedService>();
@@ -27,7 +26,4 @@ class FeedViewModel extends ReactiveViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_feedService];
-
-  //final ReactiveServiceExample _reactiveServiceExample =
-  //    locator<ReactiveServiceExample>();
 }

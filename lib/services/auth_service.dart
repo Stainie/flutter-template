@@ -35,18 +35,4 @@ class AuthenticationService extends BaseService<User> {
   User getUser() {
     return getRxModelValue();
   }
-
-  // TODO: remove this properties?
-
-  // Alex: I would say 'yes' since we can access User from AppState
-  // using getUser method, which can call getModel().
-
-  // User _user;
-  // User get user => _user;
-
-  // setModelInAppState(userModel);
-
-  /*User getUser() {
-    return getModelFromAppState();
-  }*/
 }
