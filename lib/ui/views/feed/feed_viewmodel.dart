@@ -6,22 +6,21 @@ import '../../../app/router.gr.dart';
 import '../../../models/feed.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/feed_service.dart';
-import '../../../services/reactive_service_example.dart';
+import '../../../state/app_state.dart';
 
 class FeedViewModel extends ReactiveViewModel {
   final FeedService _feedService = locator<FeedService>();
   final NavigationService _navigator = locator<NavigationService>();
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
-  final ReactiveServiceExample _reactiveServiceExample =
-      locator<ReactiveServiceExample>();
 
-  List<Feed> feed = List();
+  List<Feed> get feed => _feedService.getFeedList();
+  AppState get appState => _feedService.getAppState();
+  String get userName => appState.state['user'].username;
 
   Future getPosts() async {
-    feed = await runBusyFuture(
-        _feedService.getFeedList(_authenticationService.user.id));
-    notifyListeners();
+    await runBusyFuture(
+        _feedService.retrieveFeedList(_authenticationService.getUser().id));
   }
 
   void navigateToEntry(int id) {
@@ -29,6 +28,5 @@ class FeedViewModel extends ReactiveViewModel {
   }
 
   @override
-  // TODO: implement reactiveServices
-  List<ReactiveServiceMixin> get reactiveServices => [_reactiveServiceExample];
+  List<ReactiveServiceMixin> get reactiveServices => [_feedService];
 }

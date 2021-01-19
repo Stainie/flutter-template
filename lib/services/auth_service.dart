@@ -5,13 +5,16 @@ import '../app/locator.dart';
 import '../models/user.dart';
 import 'base_service.dart';
 import 'core/api.dart';
+import '../state/app_state_constants.dart';
 
-class AuthenticationService extends BaseService {
+User defaultUserModel = User(username: null, id: null);
+
+class AuthenticationService extends BaseService<User> {
   final Api _api = locator<Api>();
 
-  // TODO: remove this properties?
-  User _user;
-  User get user => _user;
+  AuthenticationService() {
+    initialiseRxAppState();
+  }
 
   Future<bool> authenticateUser(String text) async {
     try {
@@ -21,12 +24,15 @@ class AuthenticationService extends BaseService {
       final response = await _api.executePostRequest("authenticate", body);
 
       userModel.authenticated = response['authenticated'];
-
-      runAndUpdateState(userModel);
+      appStateService.setState({APP_STATE_USER_KEY: userModel});
 
       return true;
     } on CustomException catch (e) {
       return _api.handleException(e);
     }
+  }
+
+  User getUser() {
+    return getAppState().state['user'];
   }
 }

@@ -1,20 +1,19 @@
 import '../models/base_model.dart';
-import '../models/collections/feed.dart';
-import '../models/user.dart';
 
 class AppState {
-  Map<Type, dynamic> stateValues;
+  Map<String, dynamic> state;
 
-  AppState({this.stateValues});
+  AppState({this.state});
 
-  User get user => stateValues[User];
-  FeedCollection get feed => stateValues[FeedCollection];
+  AppState clone() {
+    Map<String, dynamic> clonedState = Map.from(state);
 
-  AppState clone(BaseModel model) {
-    Map<Type, dynamic> clonedValues = Map.from(stateValues);
+    clonedState.forEach((key, value) {
+      if (value is BaseModel) {
+        clonedState[key] = value.clone();
+      }
+    });
 
-    clonedValues[model.runtimeType] = model;
-
-    return AppState(stateValues: clonedValues);
+    return AppState(state: clonedState);
   }
 }
