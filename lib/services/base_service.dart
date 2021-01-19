@@ -1,11 +1,8 @@
-// Alex: package not found, triggered compile errors, not needed anyway?
-//import 'dart:js_util';
-
 import 'package:observable_ish/observable_ish.dart';
 import 'package:flutter_template/app/locator.dart';
-import 'package:flutter_template/models/base_model.dart';
 import 'package:flutter_template/models/root_model.dart';
 import 'package:flutter_template/services/core/app_state_service.dart';
+
 import '../state/app_state.dart';
 
 // TODO: using RootModel until we learn a way to have list of potential extends ?
@@ -19,6 +16,19 @@ class BaseService<T extends RootModel> {
   initialiseRxAppState() {
     this._rxAppState =
         RxValue<AppState>(initial: appStateService.getAppState());
+    appStateService.addListener(_appStateChange);
+  }
+
+  _appStateChange() {
+    this._rxAppState.value = appStateService.getAppState();
+  }
+
+  getRxAppState() {
+    return this._rxAppState;
+  }
+
+  getAppState() {
+    return this._rxAppState.value;
   }
 
   initialiseRxModel(T value) {
@@ -36,16 +46,4 @@ class BaseService<T extends RootModel> {
   T getRxModelValue() {
     return this._rxModel.value;
   }
-
-  // final AppStateService _appStateService = locator<AppStateService>();
-
-  /* runAndUpdateState(T object) { */
-  /*setModelInAppState(T object) {
-    _appStateService.setStateModel(this, object);
-  }*/
-
-  // Alex: Get associated model from AppStateService
-  /*T getModelFromAppState() {
-    return _appStateService.getState(T);
-  }*/
 }

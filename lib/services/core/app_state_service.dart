@@ -1,49 +1,26 @@
-import 'package:flutter_template/models/base_model.dart';
-import 'package:flutter_template/models/root_model.dart';
-import 'package:flutter_template/services/base_service.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:observable_ish/observable_ish.dart';
+import 'package:stacked/stacked.dart';
 
-import '../../app/locator.dart';
 import '../../state/app_state.dart';
 import '../../state/initial_state.dart';
-import '../feed_service.dart';
-import '../auth_service.dart';
-import '../../models/collections/feed.dart';
-import '../../models/user.dart';
 
-class AppStateService {
-  AppState appState = AppState(state: initialState);
-
-  AppState getAppState() {
-    return this.appState;
+class AppStateService with ReactiveServiceMixin {
+  AppStateService() {
+    listenToReactiveValues([rxAppState]);
   }
 
-  void setState(Map<String, dynamic> mutation) {}
+  RxValue<AppState> rxAppState =
+      RxValue<AppState>(initial: AppState(state: initialState));
 
-  /* Map<Type, BaseService> allServices = {
-    FeedCollection: locator<FeedService>(),
-    User: locator<AuthenticationService>()
-  }; */
+  AppState getAppState() {
+    return this.rxAppState.value;
+  }
 
-  /* void setStateModel(BaseService callingService, RootModel model) {
-    callingService.notifyViewModels(state.setModel(model));
-  } */
-
-  // Alex: change 'mutation' to 'model'
-  /* void setState(List<RootModel> models) {
-    AppState newState = state.clone(models);
-    state = newState;
-    notifyAllServices();
-  } */
-
-  /* void notifyAllServices() {
-    allServices.forEach((modelType, service) {
-      service.notifyViewModels(state.stateValues[modelType]);
+  void setState(Map<String, dynamic> mutation) {
+    AppState newState = rxAppState.value.clone();
+    mutation.forEach((key, value) {
+      newState.state[key] = value;
     });
-  } */
-
-  // Alex: Implement getState
-  /* RootModel getState(Type modelType) {
-    return state.stateValues[modelType];
-  } */
+    rxAppState.value = newState;
+  }
 }

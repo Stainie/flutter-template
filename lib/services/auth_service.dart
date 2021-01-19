@@ -14,8 +14,6 @@ class AuthenticationService extends BaseService<User> {
 
   AuthenticationService() {
     initialiseRxAppState();
-
-    //initialiseRxModel(defaultUserModel);
   }
 
   Future<bool> authenticateUser(String text) async {
@@ -28,8 +26,6 @@ class AuthenticationService extends BaseService<User> {
       userModel.authenticated = response['authenticated'];
       appStateService.setState({APP_STATE_USER_KEY: userModel});
 
-      // setRxModelValue(userModel);
-
       return true;
     } on CustomException catch (e) {
       return _api.handleException(e);
@@ -37,20 +33,6 @@ class AuthenticationService extends BaseService<User> {
   }
 
   User getUser() {
-    return getRxModelValue();
+    return getAppState().state['user'];
   }
-
-  // TODO: remove this properties?
-
-  // Alex: I would say 'yes' since we can access User from AppState
-  // using getUser method, which can call getModel().
-
-  // User _user;
-  // User get user => _user;
-
-  // setModelInAppState(userModel);
-
-  /*User getUser() {
-    return getModelFromAppState();
-  }*/
 }

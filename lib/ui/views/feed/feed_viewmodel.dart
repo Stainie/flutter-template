@@ -6,7 +6,7 @@ import '../../../app/router.gr.dart';
 import '../../../models/feed.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/feed_service.dart';
-import '../../../services/reactive_service_example.dart';
+import '../../../state/app_state.dart';
 
 class FeedViewModel extends ReactiveViewModel {
   final FeedService _feedService = locator<FeedService>();
@@ -15,6 +15,8 @@ class FeedViewModel extends ReactiveViewModel {
       locator<AuthenticationService>();
 
   List<Feed> get feed => _feedService.getFeedList();
+  AppState get appState => _feedService.getAppState();
+  String get userName => appState.state['user'].username;
 
   Future getPosts() async {
     await runBusyFuture(
@@ -27,7 +29,4 @@ class FeedViewModel extends ReactiveViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_feedService];
-
-  //final ReactiveServiceExample _reactiveServiceExample =
-  //    locator<ReactiveServiceExample>();
 }

@@ -1,20 +1,20 @@
+import 'core/api.dart';
+
 import 'package:flutter_template/services/base_service.dart';
-import 'package:flutter_template/services/core/app_state_service.dart';
 import 'package:stacked/stacked.dart';
-import 'package:observable_ish/observable_ish.dart';
 
 import '../app/locator.dart';
 import '../models/collections/feed.dart';
 import '../models/feed.dart';
-import 'core/api.dart';
 
 FeedCollection defaultFeedCollection = FeedCollection([]);
 
 class FeedService extends BaseService<FeedCollection>
     with ReactiveServiceMixin {
   FeedService() {
+    initialiseRxAppState();
     initialiseRxModel(defaultFeedCollection);
-    listenToReactiveValues([super.getRxModel()]);
+    listenToReactiveValues([super.getRxModel(), super.getRxAppState()]);
   }
 
   final Api _api = locator<Api>();
@@ -26,9 +26,6 @@ class FeedService extends BaseService<FeedCollection>
     } on CustomException catch (e) {
       return _api.handleException(e);
     }
-
-    // Alex
-    // setModelInAppState(feedList);
   }
 
   List<Feed> getFeedList() {
