@@ -7,6 +7,7 @@ import '../../../models/feed.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/feed_service.dart';
 import '../../../state/app_state.dart';
+import '../../../state/app_state_constants.dart';
 
 /* 
 Steps to enable a ReactiveViewModel to listen to a Service
@@ -37,7 +38,7 @@ class FeedViewModel extends ReactiveViewModel {
 
   List<Feed> get feed => _feedService.getFeedList();
   AppState get appState => _feedService.getAppState();
-  String get userName => appState.state['user'].username;
+  String get userName => appState.state[APP_STATE_KEYS.USER].username;
 
   Future retrieveFeedList() async {
     await runBusyFuture(

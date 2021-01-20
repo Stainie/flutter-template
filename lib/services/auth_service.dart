@@ -7,8 +7,6 @@ import 'base_service.dart';
 import 'core/api.dart';
 import '../state/app_state_constants.dart';
 
-User defaultUserModel = User(username: null, id: null);
-
 class AuthenticationService extends BaseService<User> {
   final Api _api = locator<Api>();
 
@@ -24,7 +22,7 @@ class AuthenticationService extends BaseService<User> {
       final response = await _api.executePostRequest("authenticate", body);
 
       userModel.authenticated = response['authenticated'];
-      appStateService.setState({APP_STATE_USER_KEY: userModel});
+      appStateService.setState({APP_STATE_KEYS.USER: userModel});
 
       return true;
     } on CustomException catch (e) {
@@ -33,6 +31,6 @@ class AuthenticationService extends BaseService<User> {
   }
 
   User getUser() {
-    return getAppState().state['user'];
+    return getAppState().state[APP_STATE_KEYS.USER];
   }
 }

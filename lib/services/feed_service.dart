@@ -6,8 +6,7 @@ import 'package:stacked/stacked.dart';
 import '../app/locator.dart';
 import '../models/collections/feed.dart';
 import '../models/feed.dart';
-
-FeedCollection defaultFeedCollection = FeedCollection([]);
+import '../state/app_state_constants.dart';
 
 /*
 Steps to enable a Service to notify ReactiveViewModels of state changes
@@ -35,7 +34,7 @@ class FeedService extends BaseService<FeedCollection>
     with ReactiveServiceMixin {
   FeedService() {
     initialiseRxAppState();
-    initialiseRxModel(defaultFeedCollection);
+    initialiseRxModel(DEFAULT_FEED_COLLECTION);
     listenToReactiveValues([super.getRxModel(), super.getRxAppState()]);
   }
 
