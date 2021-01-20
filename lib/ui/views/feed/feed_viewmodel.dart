@@ -8,6 +8,27 @@ import '../../../services/auth_service.dart';
 import '../../../services/feed_service.dart';
 import '../../../state/app_state.dart';
 
+/* 
+Steps to enable a ReactiveViewModel to listen to a Service
+
+1. In order to listen to notifications from a Service, add the Service
+identifier to the reactiveServices @override. In this example,
+the FeedService will be listened to for changes.
+
+2. Prepare 'getters' that will be used in the attached Views. In this case,
+'feed' will retrieve the feed list from the FeedService, 'appState' will
+retrieve the global app state from the FeedService and 'userName' will retrieve 
+the user name from the global app state. These three getters appear in 
+FeedView which uses FeedViewModel in its ViewModelBuilder.
+
+Note: Each time the listened-to Service notifies the ReactiveViewModel that 
+an update has occurred, the three getters are re-run because a new instance of the
+ReactiveViewModel is created for the attached Views.
+
+3. Follow the instructions in feed_service.dart to set up the notification
+from Service to ReactiveViewModel.
+*/
+
 class FeedViewModel extends ReactiveViewModel {
   final FeedService _feedService = locator<FeedService>();
   final NavigationService _navigator = locator<NavigationService>();
@@ -18,7 +39,7 @@ class FeedViewModel extends ReactiveViewModel {
   AppState get appState => _feedService.getAppState();
   String get userName => appState.state['user'].username;
 
-  Future getPosts() async {
+  Future retrieveFeedList() async {
     await runBusyFuture(
         _feedService.retrieveFeedList(_authenticationService.getUser().id));
   }
