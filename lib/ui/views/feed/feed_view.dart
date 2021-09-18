@@ -39,7 +39,7 @@ class FeedView extends StatelessWidget {
                 itemCount: model.feed.length,
                 itemBuilder: (context, index) => GestureDetector(
                     onTap: () => model.navigateToEntry(index),
-                    child: Text(model.feed[index].description)),
+                    child: Text(model.feed[index].description ?? "")),
               ),
         Text('USER: ' + model.userName)
       ])),

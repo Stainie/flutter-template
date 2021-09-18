@@ -36,7 +36,7 @@ class FeedViewModel extends ReactiveViewModel {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
 
-  List get feed => _feedService.getRxModelList();
+  List<Feed> get feed => _feedService.getRxModelList().cast<Feed>();
   AppState get appState => _feedService.getAppState();
   String get userName => appState.state[APP_STATE_KEYS.USER].username;
 
