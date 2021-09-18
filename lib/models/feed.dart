@@ -1,10 +1,10 @@
 import 'base_model.dart';
 
 class Feed implements BaseModel<Feed> {
-  String name;
-  String description;
+  String? name;
+  String? description;
 
-  Feed(this.name, this.description) : super();
+  Feed({this.name, this.description}) : super();
 
   @override
   Map toJson() {
@@ -12,11 +12,17 @@ class Feed implements BaseModel<Feed> {
   }
 
   factory Feed.fromJson(Map<String, dynamic> parsedJson) {
-    return Feed(parsedJson["title"], parsedJson["body"]);
+    return Feed(name: parsedJson["title"], description: parsedJson["body"]);
   }
 
   @override
   Feed clone() {
-    return Feed(this.name, this.description);
+    return Feed(name: this.name, description: this.description);
+  }
+
+  @override
+  Feed cloneWithMutation(Map<String, dynamic> mutation) {
+    // TODO: implement cloneWithMutation
+    throw UnimplementedError();
   }
 }

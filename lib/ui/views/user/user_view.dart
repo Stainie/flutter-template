@@ -3,11 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 
-import '../../style/colors.dart';
 import 'user_viewmodel.dart';
 
 class UserView extends StatefulWidget {
-  const UserView({Key key}) : super(key: key);
+  const UserView({Key? key}) : super(key: key);
 
   @override
   _UserViewState createState() => _UserViewState();
@@ -36,7 +35,7 @@ class _UserViewState extends State<UserView> {
 }
 
 class _TextInput extends HookViewModelWidget<UserViewModel> {
-  const _TextInput({Key key}) : super(key: key, reactive: false);
+  const _TextInput({Key? key}) : super(key: key, reactive: false);
 
   @override
   Widget buildViewModelWidget(BuildContext context, UserViewModel viewModel) {
@@ -56,10 +55,10 @@ class _TextInput extends HookViewModelWidget<UserViewModel> {
 }
 
 class _CurrentUsername extends HookViewModelWidget<UserViewModel> {
-  const _CurrentUsername({Key key}) : super(key: key, reactive: true);
+  const _CurrentUsername({Key? key}) : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(BuildContext context, UserViewModel viewModel) {
-    return Text(viewModel.username ?? "");
+    return Text(viewModel.username);
   }
 }

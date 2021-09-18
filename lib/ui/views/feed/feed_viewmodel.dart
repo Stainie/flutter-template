@@ -1,8 +1,8 @@
+import 'package:flutter_template/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/locator.dart';
-import '../../../app/router.gr.dart';
 import '../../../models/feed.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/feed_service.dart';
@@ -36,7 +36,7 @@ class FeedViewModel extends ReactiveViewModel {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
 
-  List<Feed> get feed => _feedService.getFeedList();
+  List get feed => _feedService.getRxModelList();
   AppState get appState => _feedService.getAppState();
   String get userName => appState.state[APP_STATE_KEYS.USER].username;
 

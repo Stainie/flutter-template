@@ -6,4 +6,6 @@ abstract class BaseModel<T> extends RootModel {
   Map toJson();
 
   T clone();
+
+  T cloneWithMutation(Map<String, dynamic> mutation);
 }

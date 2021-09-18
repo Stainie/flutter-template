@@ -1,9 +1,9 @@
 import 'base_model.dart';
 
 class User implements BaseModel<User> {
-  int id;
-  String username = "";
-  bool authenticated = false;
+  int? id;
+  String? username;
+  bool? authenticated;
 
   User({this.id, this.username, this.authenticated}) : super();
 
@@ -15,8 +15,8 @@ class User implements BaseModel<User> {
   factory User.fromJson(Map<String, dynamic> parsedJson) {
     return User(
         id: parsedJson["id"],
-        username: parsedJson["username"],
-        authenticated: parsedJson["authenticated"]);
+        username: parsedJson["username"] ?? "",
+        authenticated: parsedJson["authenticated"] ?? false);
   }
 
   @override
@@ -25,5 +25,11 @@ class User implements BaseModel<User> {
         id: this.id,
         username: this.username,
         authenticated: this.authenticated);
+  }
+
+  @override
+  User cloneWithMutation(Map<String, dynamic> mutation) {
+    // TODO: implement cloneWithMutation
+    throw UnimplementedError();
   }
 }

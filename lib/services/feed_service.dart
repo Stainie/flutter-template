@@ -1,12 +1,10 @@
-import 'core/api.dart';
-
-import 'package:flutter_template/services/base_service.dart';
 import 'package:stacked/stacked.dart';
 
 import '../app/locator.dart';
 import '../models/collections/feed.dart';
-import '../models/feed.dart';
 import '../state/app_state_constants.dart';
+import 'base_service_list.dart';
+import 'core/api.dart';
 
 /*
 Steps to enable a Service to notify ReactiveViewModels of state changes
@@ -30,26 +28,21 @@ a parameter, then add super.getRxModel() to the values in the listenToReactiveVa
 array.
 */
 
-class FeedService extends BaseService<FeedCollection>
+class FeedService extends BaseServiceList<FeedCollection>
     with ReactiveServiceMixin {
   FeedService() {
-    initialiseRxAppState();
     initialiseRxModel(DEFAULT_FEED_COLLECTION);
-    listenToReactiveValues([super.getRxModel(), super.getRxAppState()]);
+    listenToReactiveValues([getRxModelList()]);
   }
 
   final Api _api = locator<Api>();
 
-  Future<void> retrieveFeedList(int id) async {
+  Future<void> retrieveFeedList(int? id) async {
     try {
       var feedRaw = await _api.executeGetRequest("feed/$id");
-      setRxModelValue(FeedCollection.fromJson(feedRaw));
+      rxAdd(FeedCollection.fromJson(feedRaw));
     } on CustomException catch (e) {
       return _api.handleException(e);
     }
-  }
-
-  List<Feed> getFeedList() {
-    return getRxModelValue().collection;
   }
 }

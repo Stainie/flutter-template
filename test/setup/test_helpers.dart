@@ -31,7 +31,7 @@ void unregisterServices() {
   locator.unregister<NavigationService>();
 }
 
-void _removeExistingRegistration<T>() {
+void _removeExistingRegistration<T extends Object>() {
   if (locator.isRegistered<T>()) {
     locator.unregister<T>();
   }

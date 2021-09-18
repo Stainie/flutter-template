@@ -97,11 +97,7 @@ class Api {
   Future<bool> _checkConnection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
 
-    if (connectivityResult == ConnectivityResult.none) {
-      return false;
-    }
-
-    return true;
+    return (connectivityResult == ConnectivityResult.none);
   }
 
   handleException(e) {
