@@ -1,3 +1,4 @@
+import 'package:flutter_template/models/feed.dart';
 import 'package:stacked/stacked.dart';
 
 import '../app/locator.dart';
@@ -28,10 +29,9 @@ a parameter, then add super.getRxModel() to the values in the listenToReactiveVa
 array.
 */
 
-class FeedService extends BaseServiceList<FeedCollection>
-    with ReactiveServiceMixin {
+class FeedService extends BaseServiceList<Feed> with ReactiveServiceMixin {
   FeedService() {
-    initialiseRxModel(DEFAULT_FEED_COLLECTION);
+    initialiseRxModel(DEFAULT_FEED_COLLECTION.collection);
     listenToReactiveValues([getRxModelList()]);
   }
 
