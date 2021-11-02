@@ -5,7 +5,7 @@ import '../app/locator.dart';
 import '../models/collections/feed.dart';
 import '../state/app_state_constants.dart';
 import 'base_service_list.dart';
-import 'core/api.dart';
+import 'core/api_service.dart';
 
 /*
 Steps to enable a Service to notify ReactiveViewModels of state changes

@@ -385,13 +385,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  observable_ish:
-    dependency: "direct main"
-    description:
-      name: observable_ish
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   package_config:
     dependency: transitive
     description:
@@ -496,7 +489,7 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.7"
+    version: "2.0.8"
   shared_preferences_linux:
     dependency: transitive
     description:
@@ -578,14 +571,14 @@ packages:
       name: stacked
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.5"
+    version: "2.2.7"
   stacked_generator:
     dependency: "direct dev"
     description:
       name: stacked_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.2"
+    version: "0.5.6"
   stacked_hooks:
     dependency: "direct main"
     description:
@@ -599,7 +592,7 @@ packages:
       name: stacked_services
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.13"
+    version: "0.8.15"
   stream_channel:
     dependency: transitive
     description:
@@ -699,5 +692,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.13.0 <3.0.0"
-  flutter: ">=2.0.0"
+  dart: ">=2.14.0 <3.0.0"
+  flutter: ">=2.5.0"

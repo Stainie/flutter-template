@@ -1,18 +1,18 @@
 import 'package:flutter_template/models/base_model.dart';
-import 'package:observable_ish/observable_ish.dart';
+import 'package:stacked/stacked.dart';
 
 import 'mixins/app_state_base_mixin.dart';
 
 class BaseServiceList<T extends BaseModel> with AppStateServiceBaseMixin {
   late List<T> collection;
-  late RxList<T> _rxModelList;
+  late ReactiveList<T> _rxModelList;
 
   initialiseRxModel(List<T> value) {
-    this._rxModelList = RxList<T>.from(value);
+    this._rxModelList = ReactiveList<T>.from(value);
     this.collection = value;
   }
 
-  RxList<T> getRxModelList() {
+  ReactiveList<T> getRxModelList() {
     return this._rxModelList;
   }
 

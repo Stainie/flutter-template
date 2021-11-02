@@ -2,7 +2,6 @@ import 'package:flutter_template/state/app_state.dart';
 import 'package:flutter_template/state/app_state_constants.dart';
 import 'package:flutter_template/state/app_variables.dart';
 import 'package:flutter_template/state/initial_state.dart';
-import 'package:observable_ish/observable_ish.dart';
 import 'package:stacked/stacked.dart';
 
 class AppStateService with ReactiveServiceMixin {
@@ -10,7 +9,7 @@ class AppStateService with ReactiveServiceMixin {
     listenToReactiveValues([rxAppState]);
   }
 
-  RxValue<AppState> rxAppState = RxValue<AppState>(
+  ReactiveValue<AppState> rxAppState = ReactiveValue<AppState>(
     AppState(state: initialState),
   );
 

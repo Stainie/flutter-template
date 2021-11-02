@@ -4,7 +4,7 @@ import 'dart:convert';
 import '../app/locator.dart';
 import '../models/user.dart';
 import 'base_service.dart';
-import 'core/api.dart';
+import 'core/api_service.dart';
 import '../state/app_state_constants.dart';
 
 class AuthenticationService extends BaseService<User> {
