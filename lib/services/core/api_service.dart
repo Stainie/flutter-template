@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_template/models/network/api_error.dart';
 import 'package:flutter_template/models/network/api_result.dart';
+import 'package:flutter_template/models/network/interceptors/retry_interceptor.dart';
 import 'package:flutter_template/state/api_urls.dart';
 
 enum HttpMethod { get, post, put, delete, patch }
@@ -24,13 +27,15 @@ extension on HttpMethod {
 }
 
 class ApiService {
+  final Connectivity _connectivity = Connectivity();
   final Dio _client = Dio(BaseOptions(
     baseUrl: apiHost,
     contentType: 'application/json',
     connectTimeout: 10000,
     receiveTimeout: 10000,
   ))
-    ..interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    ..interceptors.add(LogInterceptor(requestBody: true, responseBody: true))
+    ..interceptors.add(RetryInterceptor());
 
   Future<ApiResult<T>> request<T>(
     String path,
@@ -63,45 +68,34 @@ class ApiService {
             e.response?.data as Map<String, dynamic>;
         final ApiError error = ApiError.fromJson(errorData);
         print('[API] Parsed Dio error!');
-        return ApiResult<T>.error(error);
+        return ApiResult<T>.error(
+            error.copyWith(statusCode: e.response!.statusCode!));
       } catch (e) {
         print('[API] Failed parsing Dio Error! Rethrowing!');
         const ApiError error =
-            ApiError('Unsuccessfully tried parsing error message.');
+            ApiError('Unsuccessfully tried parsing error message.', 520);
         return ApiResult<T>.error(error);
       }
     } catch (e) {
       print('[API] General error: $e');
-      const ApiError error = ApiError('An unspecified error occurred.');
+      const ApiError error = ApiError('An unspecified error occurred.', 520);
       return ApiResult<T>.error(error);
     }
   }
 
-  Future<bool> _checkConnection() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
+  Future<Response> scheduleRequestRetry(RequestOptions requestOptions) async {
+    final responseCompleter = Completer<Response>();
+    StreamSubscription? streamSubscription;
 
-    return (connectivityResult == ConnectivityResult.none);
-  }
-
-  handleException(e) {
-    print(e.cause);
-    switch (e.cause) {
-      case ApiErrors.ACCESS_DENIED:
-        break;
-      case ApiErrors.WRONG_VERSION:
-        break;
-      case ApiErrors.NO_INTERNET:
-        break;
-      case ApiErrors.OTHER_ERROR:
-        break;
-    }
-    return null;
+    streamSubscription = _connectivity.onConnectivityChanged.listen((result) {
+      if (result != ConnectivityResult.none) {
+        streamSubscription!.cancel();
+        responseCompleter.complete(_client.request(requestOptions.path,
+            options: Options(method: requestOptions.method),
+            queryParameters: requestOptions.queryParameters,
+            data: requestOptions.data));
+      }
+    });
+    return responseCompleter.future;
   }
 }
-
-class CustomException implements Exception {
-  final cause;
-  CustomException(this.cause);
-}
-
-enum ApiErrors { NO_INTERNET, WRONG_VERSION, ACCESS_DENIED, OTHER_ERROR }

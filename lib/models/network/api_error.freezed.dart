@@ -21,9 +21,10 @@ ApiError _$ApiErrorFromJson(Map<String, dynamic> json) {
 class _$ApiErrorTearOff {
   const _$ApiErrorTearOff();
 
-  _Error call(String error) {
+  _Error call(String error, int statusCode) {
     return _Error(
       error,
+      statusCode,
     );
   }
 
@@ -38,6 +39,7 @@ const $ApiError = _$ApiErrorTearOff();
 /// @nodoc
 mixin _$ApiError {
   String get error => throw _privateConstructorUsedError;
+  int get statusCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +51,7 @@ mixin _$ApiError {
 abstract class $ApiErrorCopyWith<$Res> {
   factory $ApiErrorCopyWith(ApiError value, $Res Function(ApiError) then) =
       _$ApiErrorCopyWithImpl<$Res>;
-  $Res call({String error});
+  $Res call({String error, int statusCode});
 }
 
 /// @nodoc
@@ -63,12 +65,17 @@ class _$ApiErrorCopyWithImpl<$Res> implements $ApiErrorCopyWith<$Res> {
   @override
   $Res call({
     Object? error = freezed,
+    Object? statusCode = freezed,
   }) {
     return _then(_value.copyWith(
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      statusCode: statusCode == freezed
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -78,7 +85,7 @@ abstract class _$ErrorCopyWith<$Res> implements $ApiErrorCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
       __$ErrorCopyWithImpl<$Res>;
   @override
-  $Res call({String error});
+  $Res call({String error, int statusCode});
 }
 
 /// @nodoc
@@ -93,12 +100,17 @@ class __$ErrorCopyWithImpl<$Res> extends _$ApiErrorCopyWithImpl<$Res>
   @override
   $Res call({
     Object? error = freezed,
+    Object? statusCode = freezed,
   }) {
     return _then(_Error(
       error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      statusCode == freezed
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -106,17 +118,19 @@ class __$ErrorCopyWithImpl<$Res> extends _$ApiErrorCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Error implements _Error {
-  const _$_Error(this.error);
+  const _$_Error(this.error, this.statusCode);
 
   factory _$_Error.fromJson(Map<String, dynamic> json) =>
       _$$_ErrorFromJson(json);
 
   @override
   final String error;
+  @override
+  final int statusCode;
 
   @override
   String toString() {
-    return 'ApiError(error: $error)';
+    return 'ApiError(error: $error, statusCode: $statusCode)';
   }
 
   @override
@@ -124,11 +138,13 @@ class _$_Error implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Error &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, error, statusCode);
 
   @JsonKey(ignore: true)
   @override
@@ -142,12 +158,14 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements ApiError {
-  const factory _Error(String error) = _$_Error;
+  const factory _Error(String error, int statusCode) = _$_Error;
 
   factory _Error.fromJson(Map<String, dynamic> json) = _$_Error.fromJson;
 
   @override
   String get error;
+  @override
+  int get statusCode;
   @override
   @JsonKey(ignore: true)
   _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
