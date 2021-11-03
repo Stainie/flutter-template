@@ -1,10 +1,11 @@
 import 'package:flutter_template/models/feed.dart';
+import 'package:flutter_template/models/network/api_result.dart';
 import 'package:stacked/stacked.dart';
 
 import '../app/locator.dart';
 import '../models/collections/feed.dart';
 import '../state/app_state_constants.dart';
-import 'base_service_list.dart';
+import 'core/base_service_list.dart';
 import 'core/api_service.dart';
 
 /*
@@ -35,14 +36,11 @@ class FeedService extends BaseServiceList<Feed> with ReactiveServiceMixin {
     listenToReactiveValues([getRxModelList()]);
   }
 
-  final Api _api = locator<Api>();
+  final ApiService _api = locator<ApiService>();
 
-  Future<void> retrieveFeedList(int? id) async {
-    try {
-      var feedRaw = await _api.executeGetRequest("feed/$id");
-      rxAdd(FeedCollection.fromJson(feedRaw));
-    } on CustomException catch (e) {
-      return _api.handleException(e);
-    }
-  }
+  Future<ApiResult<void>> retrieveFeedList(int? id) async =>
+      _api.request("feed/$id", HttpMethod.get, token: 'token',
+          onSuccess: (response) {
+        rxAdd(FeedCollection.fromJson(response.data));
+      });
 }

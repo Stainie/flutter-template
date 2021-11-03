@@ -1,4 +1,5 @@
 import 'package:flutter_template/app/app.router.dart';
+import 'package:flutter_template/models/network/api_result.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -30,19 +31,23 @@ ReactiveViewModel is created for the attached Views.
 from Service to ReactiveViewModel.
 */
 
-class FeedViewModel extends ReactiveViewModel {
+class FeedViewModel extends FutureViewModel {
   final FeedService _feedService = locator<FeedService>();
   final NavigationService _navigator = locator<NavigationService>();
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
 
-  List<Feed> get feed => _feedService.getRxModelList().cast<Feed>();
+  List<Feed> get feed => _feedService.getRxModelList();
   AppState get appState => _feedService.getAppState();
   String get userName => appState.state[APP_STATE_KEYS.USER].username;
 
   Future retrieveFeedList() async {
-    await runBusyFuture(
-        _feedService.retrieveFeedList(_authenticationService.getUser().id));
+    await _feedService.retrieveFeedList(_authenticationService.getUser().id)
+      ..when(success: (_) {
+        setBusy(false);
+      }, error: (error) {
+        setError(error.error);
+      });
   }
 
   void navigateToEntry(int id) {
@@ -51,4 +56,7 @@ class FeedViewModel extends ReactiveViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_feedService];
+
+  @override
+  Future futureToRun() => retrieveFeedList();
 }

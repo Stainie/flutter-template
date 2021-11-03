@@ -40,12 +40,17 @@ dependencies:
   #inversion of control management (dependency injection)
   get_it: ^7.2.0
 
+  #model data generator / sealed classes + removing boilerplate
+  freezed: ^0.15.0+1
+
   #navigation (allows navigation from viewmodel - without context)
   stacked_services: ^0.8.15 # used for performing functionalities that require context within ViewModel - also includes showing BottomSheets, Dialogs and SnackBars
 
   shared_preferences: ^2.0.8
   connectivity: ^3.0.6
+  dio: ^4.0.0 # used for handling http requests alongside complete error handling
   http:
+  json_serializable: ^6.0.1
   flutter_secure_storage: ^4.2.1
 
 dev_dependencies:
@@ -69,17 +74,7 @@ flutter:
 
   assets:
     - assets/lang/
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
+ 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

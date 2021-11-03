@@ -1,7 +1,7 @@
 import 'package:flutter_template/models/base_model.dart';
 import 'package:stacked/stacked.dart';
 
-import 'mixins/app_state_base_mixin.dart';
+import '../mixins/app_state_base_mixin.dart';
 
 class BaseService<T extends BaseModel> with AppStateServiceBaseMixin {
   late T model;

@@ -33,13 +33,13 @@ class StackedRouter extends RouterBase {
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
     UserView: (data) {
-      return CupertinoPageRoute<CupertinoRoute<dynamic>>(
+      return CupertinoPageRoute<dynamic>(
         builder: (context) => const UserView(),
         settings: data,
       );
     },
     FeedView: (data) {
-      return CupertinoPageRoute<CupertinoRoute<dynamic>>(
+      return CupertinoPageRoute<dynamic>(
         builder: (context) => FeedView(),
         settings: data,
       );

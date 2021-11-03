@@ -44,7 +44,6 @@ class FeedView extends StatelessWidget {
         Text('USER: ' + model.userName)
       ])),
       viewModelBuilder: () => FeedViewModel(),
-      onModelReady: (model) => model.retrieveFeedList(),
     );
   }
 }

@@ -21,10 +21,13 @@ class UserViewModel extends BaseViewModel {
   Future authenticateUser() async {
     setBusy(true);
 
-    bool response = await _authenticationService.authenticateUser(_username);
-    setBusy(false);
-    if (response) {
-      _navigator.navigateTo(Routes.feedView);
-    }
+    await _authenticationService.authenticateUser(_username)
+      ..when(success: (response) {
+        if (response) {
+          _navigator.navigateTo(Routes.feedView);
+        }
+      }, error: (error) {
+        setError(true);
+      });
   }
 }
