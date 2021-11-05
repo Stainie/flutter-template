@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:datadog_flutter/datadog_rum.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_template/models/network/api_error.dart';
 import 'package:flutter_template/models/network/api_result.dart';
@@ -52,6 +53,9 @@ class ApiService {
     if (addAcceptHeader) options.headers?['Accept'] = 'application/json';
 
     try {
+      DatadogRum.instance
+          .startResourceLoading(path, method: method.name, url: path);
+
       final Response<dynamic> response = await _client.request(
         path,
         options: options,
@@ -59,26 +63,36 @@ class ApiService {
         data: data,
       );
 
+      DatadogRum.instance
+          .stopResourceLoading(path, statusCode: response.statusCode);
       return ApiResult<T>.success(onSuccess(response));
     } on DioError catch (e) {
-      print('[API] Dio error! Error: ${e.type}');
-      print('[API] Proceeding to parse Dio error.');
+      print('[API] Http error! Error: ${e.type}');
+      print('[API] Proceeding to parse Http error.');
       try {
         final Map<String, dynamic> errorData =
             e.response?.data as Map<String, dynamic>;
         final ApiError error = ApiError.fromJson(errorData);
-        print('[API] Parsed Dio error!');
+        print('[API] Parsed Http error!');
+        DatadogRum.instance
+            .stopResourceLoading(path, statusCode: error.statusCode);
         return ApiResult<T>.error(
             error.copyWith(statusCode: e.response!.statusCode!));
       } catch (e) {
-        print('[API] Failed parsing Dio Error! Rethrowing!');
+        print('[API] Failed parsing Http Error! Rethrowing!');
         const ApiError error =
             ApiError('Unsuccessfully tried parsing error message.', 520);
+        DatadogRum.instance
+            .stopResourceLoading(path, statusCode: error.statusCode);
+
         return ApiResult<T>.error(error);
       }
     } catch (e) {
       print('[API] General error: $e');
       const ApiError error = ApiError('An unspecified error occurred.', 520);
+      DatadogRum.instance
+          .stopResourceLoading(path, statusCode: error.statusCode);
+
       return ApiResult<T>.error(error);
     }
   }
