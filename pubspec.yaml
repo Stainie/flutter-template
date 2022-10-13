@@ -33,7 +33,7 @@ dependencies:
   cupertino_icons: ^1.0.5
 
   #state management
-  stacked: ^2.3.12
+  stacked: ^3.0.0
   stacked_hooks: ^0.2.2 # for partial widgets (updating only one child widget instead of all)
   flutter_hooks: ^0.18.5+1 # for removing extra code (f.e. allows creating stateless text editing widgets - doesn't require init and dispose)
 
@@ -41,10 +41,10 @@ dependencies:
   get_it: ^7.2.0
 
   #model data generator / sealed classes + removing boilerplate
-  freezed: ^0.15.0+1
+  freezed: ^2.1.1
 
   #navigation (allows navigation from viewmodel - without context)
-  stacked_services: ^0.9.1 # used for performing functionalities that require context within ViewModel - also includes showing BottomSheets, Dialogs and SnackBars
+  stacked_services: ^0.9.5 # used for performing functionalities that require context within ViewModel - also includes showing BottomSheets, Dialogs and SnackBars
 
   shared_preferences: ^2.0.15
   connectivity_plus: ^2.3.0
@@ -59,7 +59,7 @@ dev_dependencies:
 
   build_runner:
   mockito:
-  stacked_generator: ^0.7.10
+  stacked_generator: ^0.8.0+1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

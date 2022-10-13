@@ -9,12 +9,14 @@ class FakeStorage extends Fake implements FlutterSecureStorage {
   bool firstRun = true;
 
   @override
-  Future<String?> read({
-    required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-  }) async {
+  Future<String?> read(
+      {required String key,
+      IOSOptions? iOptions,
+      AndroidOptions? aOptions,
+      LinuxOptions? lOptions,
+      WebOptions? webOptions,
+      MacOsOptions? mOptions,
+      WindowsOptions? wOptions}) async {
     return (fakeStorage.containsKey(key)) ? fakeStorage[key] : null;
   }
 
@@ -22,9 +24,12 @@ class FakeStorage extends Fake implements FlutterSecureStorage {
   Future<void> write({
     required String key,
     required String? value,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    IOSOptions? iOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    MacOsOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     if (value != null) {
       fakeStorage[key] = value;
@@ -38,9 +43,12 @@ class FakeStorage extends Fake implements FlutterSecureStorage {
   @override
   Future<void> delete({
     required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    IOSOptions? iOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    MacOsOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     if (fakeStorage.containsKey(key)) {
       fakeStorage.remove(key);
@@ -49,18 +57,24 @@ class FakeStorage extends Fake implements FlutterSecureStorage {
 
   @override
   Future<void> deleteAll({
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    IOSOptions? iOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    MacOsOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     fakeStorage.clear();
   }
 
   @override
   Future<Map<String, String>> readAll({
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    IOSOptions? iOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    MacOsOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     Map<String, String> fakeStorageCopy = Map.from(fakeStorage);
     return fakeStorageCopy;
