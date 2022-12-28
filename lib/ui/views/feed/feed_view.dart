@@ -26,6 +26,11 @@ and model.userName is used to reflect the user's name from the global app state.
 
 */
 class FeedView extends StatelessWidget {
+  final int id;
+  final String name;
+
+  const FeedView({super.key, required this.id, required this.name});
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<FeedViewModel>.reactive(

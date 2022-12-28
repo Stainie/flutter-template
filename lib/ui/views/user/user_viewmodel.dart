@@ -24,7 +24,8 @@ class UserViewModel extends BaseViewModel {
     await _authenticationService.authenticateUser(_username)
       ..when(success: (response) {
         if (response) {
-          _navigator.navigateTo(Routes.feedView);
+          _navigator.navigateTo(Routes.feedView,
+              arguments: FeedViewArguments(id: 1, name: _username));
         }
       }, error: (error) {
         setError(true);
