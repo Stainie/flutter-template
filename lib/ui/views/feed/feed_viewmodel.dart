@@ -1,5 +1,4 @@
 import 'package:flutter_template/app/app.router.dart';
-import 'package:flutter_template/models/network/api_result.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -55,7 +54,7 @@ class FeedViewModel extends FutureViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_feedService];
+  List<ListenableServiceMixin> get listenableServices => [_feedService];
 
   @override
   Future futureToRun() => retrieveFeedList();

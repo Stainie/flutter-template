@@ -4,7 +4,7 @@ import 'package:flutter_template/state/app_variables.dart';
 import 'package:flutter_template/state/initial_state.dart';
 import 'package:stacked/stacked.dart';
 
-class AppStateService with ReactiveServiceMixin {
+class AppStateService with ListenableServiceMixin {
   AppStateService() {
     listenToReactiveValues([rxAppState]);
   }

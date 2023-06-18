@@ -30,7 +30,7 @@ a parameter, then add super.getRxModel() to the values in the listenToReactiveVa
 array.
 */
 
-class FeedService extends BaseServiceList<Feed> with ReactiveServiceMixin {
+class FeedService extends BaseServiceList<Feed> with ListenableServiceMixin {
   FeedService() {
     initialiseRxModel(DEFAULT_FEED_COLLECTION.collection);
     listenToReactiveValues([getRxModelList()]);

@@ -33,7 +33,7 @@ dependencies:
   cupertino_icons: ^1.0.5
 
   #state management
-  stacked: ^3.0.0
+  stacked: ^3.1.0
   stacked_hooks: ^0.2.2 # for partial widgets (updating only one child widget instead of all)
   flutter_hooks: ^0.18.5+1 # for removing extra code (f.e. allows creating stateless text editing widgets - doesn't require init and dispose)
 
