@@ -31,8 +31,8 @@ class ApiService {
   final Dio _client = Dio(BaseOptions(
     baseUrl: apiHost,
     contentType: 'application/json',
-    connectTimeout: 10000,
-    receiveTimeout: 10000,
+    connectTimeout: Duration(seconds: 10),
+    receiveTimeout: Duration(seconds: 10),
   ))
     ..interceptors.add(LogInterceptor(requestBody: true, responseBody: true))
     ..interceptors.add(RetryInterceptor());
@@ -60,7 +60,7 @@ class ApiService {
       );
 
       return ApiResult<T>.success(onSuccess(response));
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print('[API] Dio error! Error: ${e.type}');
       print('[API] Proceeding to parse Dio error.');
       try {
